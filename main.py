@@ -5,6 +5,8 @@
 
 #  #  #  #  #  #  #  #  IMPORTING LIBRARIES
 
+# CMD ["pip3 install torch torchvision torchaudio"]
+# from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
 import discord
 from discord.ext import tasks
 import pytz
@@ -29,6 +31,11 @@ client = discord.Client(intents=intents)
 
 CHANNEL_ID = 746537426243289152 # para tomar os meios de produção
 # CHANNEL_ID = 984915233644642304 # para testes
+
+# setup smart answers
+
+# tokenizer = BlenderbotTokenizer.from_pretrained("facebook/blenderbot-400M-distill")
+# model = BlenderbotForConditionalGeneration.from_pretrained("facebook/blenderbot-400M-distill")
 
 # setup porta dos fundos
 f = open('data/porta_dos_fundos.txt') 
@@ -75,8 +82,8 @@ async def on_ready():
 	activity = discord.Activity(type=discord.ActivityType.listening, name="!comandos")
 	send.start() # start loop when bot starts
 	await client.change_presence(status=discord.Status.online, activity=activity)
-	await channel.send("i'm back bitches")
-	await channel.send("@ocamposfaria não esqueça de executar `fly scale count 1`")
+	# await channel.send("i'm back bitches")
+	# await channel.send("@ocamposfaria não esqueça de executar `fly scale count 1`")
 
 @client.event
 async def on_message(message):
@@ -102,6 +109,15 @@ async def on_message(message):
 !variação [ação] [qtde meses] meses
 
 ou use !patch notes para ver as últimas atualizações""")
+
+# respostas inteligentes
+		if message.content.startswith('!smart'):
+				# text = " ".join(message.content.split()[1:])
+				# input = tokenizer(text, return_tensors="pt")
+				# output = model.generate(**input)
+				# output_treated = tokenizer.decode(output[0]).replace('<s>', '').replace('</s>', '').lower()
+				# await message.channel.send(output_treated)
+				await message.channel.send('minhas respostas inteligentes estão desligadas no momento.')
 
 # saudações
 		if message.content.startswith('!oi juau robô'):
